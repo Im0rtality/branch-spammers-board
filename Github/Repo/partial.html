@@ -1,0 +1,18 @@
+<p>Master at {{ repo.master.object.sha }}</p>
+<p>Total branches: {{ repo.branches.length }}</p>
+<p>Stale branches: {{ staleBranches.length }}</p>
+
+<!--<ul class="nav nav-pills nav-stacked">-->
+<!--<li ng-repeat="branch in staleBranches">-->
+<!--<a href="#/repo/{{ repo.owner }}/{{ repo.name }}/{{ branch.sha }}">{{ branch.name }}</a>-->
+<!--<span>behind {{ branch.behind }} / ahead {{ branch.ahead }}</span>-->
+<!--<span>Committer: {{ branch.status.commit.author.name }}</span>-->
+<!--</li>-->
+<!--</ul>-->
+    <h1>Aš nemoku trinti branchų:</h1>
+<ul>
+    <li ng-repeat="user in devs | orderBy:staleBranches.length">
+        <p>{{ user.name }}</p>
+        <img ng-src="{{ user.avatar }}" height="150"/>
+    </li>
+</ul>
