@@ -3,10 +3,8 @@
 angular.module('App', [
     'ngRoute',
     'restangular',
-    'App.Github.Repo.Controller',
-    'App.Github.Branch.Controller',
-    'App.Filter.Magic'
-])
+    'App.Github.Repo.Controller'
+    ])
     .config([
         '$routeProvider', 'RestangularProvider', function ($routeProvider, RestangularProvider) {
             RestangularProvider.setBaseUrl('https://api.github.com/');
@@ -16,10 +14,6 @@ angular.module('App', [
                 .when('/repo/:owner/:repo', {
                     templateUrl: 'Github/Repo/partial.html',
                     controller: 'GithubRepoController'
-                })
-                .when('/repo/:owner/:repo/:sha', {
-                    templateUrl: 'Github/Branch/partial.html',
-                    controller: 'GithubBranchController'
                 })
                 .otherwise({redirectTo: '/repo/???/???'});
         }
