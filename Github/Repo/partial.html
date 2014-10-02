@@ -1,22 +1,46 @@
-<div class="row">
+<div class="row" ng-if="devs.length && !loading">
     <div class="col-md-12">
-        <h1>Aš nemoku trinti branchų!</h1>
-
-        <div class="media" ng-repeat="user in devs | orderBy:staleBranches.length">
+        <div class="alert alert-danger" role="alert">
+            <h1 class="text-center">Aš nemoku trinti branchų :(</h1>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="media" ng-repeat="user in devs | head">
             <a class="pull-left" href="#">
-                <img class="media-object" ng-src="{{ user.avatar }}">
+                <img class="media-object" ng-src="{{ user.avatar }}" height="350">
             </a>
 
             <div class="media-body">
-                <h4 class="media-heading">{{ user.name }}</h4>
+                <h1 class="media-heading">{{ user.name }}</h1>
 
-                <h2>Branchai: {{ staleBranches.length }}</h2>
+                <h2>Branchai: {{ user.count }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="media" ng-repeat="user in devs | tail">
+            <a class="pull-left" href="#">
+                <img class="media-object" ng-src="{{ user.avatar }}" height="75">
+            </a>
+
+            <div class="media-body">
+                <h3 class="media-heading">{{ user.name }}</h3>
+
+                <h4>Branchai: {{ user.count }}</h4>
             </div>
         </div>
     </div>
 </div>
 
-<div class="row">
+<div class="row" ng-if="!devs.length && !loading">
+    <div class="col-md-12">
+        <div class="alert alert-success" role="alert">
+            <h1 class="text-center">Mes MOKAM trinti branchus, YAY!</h1>
+        </div>
+    </div>
+</div>
+
+<div class="row" ng-if="loading">
     <div class="col-md-12">
         <p>Master at {{ repo.master.object.sha }}</p>
 

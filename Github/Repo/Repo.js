@@ -13,8 +13,8 @@ angular
                 this.lastPage = null;
                 this.owner = owner;
                 this.name = repo;
-                this.master = Restangular.all('repos').all(owner).all(repo).all('git').one('refs', 'heads/master').get().$object;
-
+                this.master = Restangular.all('repos').all(owner).all(repo).all('git')
+                    .one('refs', 'heads/master').get().$object;
 
                 this.read = function (page) {
                     var promise;
@@ -34,7 +34,10 @@ angular
                         }
 
                         _.forEach(data.data, function (branch) {
-                            self.branches.push(new Branch(owner, repo, branch.commit.sha, branch.name, self.master.object.sha));
+                            if (branch.commit) {
+                                self.branches.push(
+                                    new Branch(owner, repo, branch.commit.sha, branch.name, self.master.object.sha));
+                            }
                         });
 
                         if (success) {

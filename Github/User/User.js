@@ -5,11 +5,7 @@ angular
             User = function (name, avatar) {
                 this.name = name;
                 this.avatar = avatar;
-                this.staleBranches = [];
-
-                this.addStaleBranch = function (branch) {
-                    this.staleBranches.push(branch);
-                };
+                this.count = 0;
             };
 
             return User;
